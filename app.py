@@ -210,13 +210,22 @@ def update_graph(selected_category):
 
 @app.callback(
     Output('questions-table', 'data'),
+    Output('questions-table', 'style_data_conditional'),
     Input('category-dropdown', 'value')
 )
 def update_questions_table(selected_category):
     filtered_df = df[df['category'] == selected_category].sort_values(by='end_date', ascending=True)
     data = filtered_df.to_dict('records')
-    return data
+    style_data_conditional = [
+        {
+            "if": {"column_id": "net", "filter_query": f"{{net}} = {row['net']}"},
+            "backgroundColor": get_net_color(row["net"]),
+            "color": "black"
+        }
+        for _, row in filtered_df.iterrows()
+    ]
+    return data, style_data_conditional
 
 # Run the Dash app
 if __name__ == "__main__":
-    app.run_server(host="0.0.0.0")
+    app.run_server(host="0.0.0.0", debug=True)
