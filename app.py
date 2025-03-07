@@ -5,6 +5,9 @@ import dash
 from dash import dcc, html, dash_table
 import plotly.express as px
 from dash.dependencies import Input, Output
+import os
+
+DEBUG=os.environ.get('DEBUG', False)
 
 # Load CSV from URL
 ghurl = "https://github.com/rojwilco/538-data/tree/master/trump-2-poll-issue-questions"
@@ -228,4 +231,4 @@ def update_questions_table(selected_category):
 
 # Run the Dash app
 if __name__ == "__main__":
-    app.run_server(host="0.0.0.0", debug=True)
+    app.run_server(host="0.0.0.0", debug=DEBUG)
