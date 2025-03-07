@@ -92,6 +92,8 @@ style_data_conditional = [
 # Initialize Dash app
 app = dash.Dash(__name__)
 
+app.title = "Trump Action Approval Trends"
+
 app.layout = app.layout = html.Div(
     style={
         'fontFamily': 'Arial, sans-serif',
