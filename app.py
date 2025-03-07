@@ -43,6 +43,9 @@ df['no'] = df['no'].astype(float)
 # Aggregate by category and end date
 df_grouped = df.groupby(["category", "end_date"], as_index=False).agg({"yes": "mean", "no": "mean", "net": "mean"})
 
+# Aggregate by all categories
+df_all = df.groupby("end_date", as_index=False).agg({"yes": "mean", "no": "mean", "net": "mean"})
+
 # Summary sorted by net percentage
 df_summary = df_grouped.groupby("category", as_index=False).agg({"yes": "mean", "no": "mean", "net": "mean"}).sort_values(by="net", ascending=False)
 
@@ -143,8 +146,8 @@ app.layout = app.layout = html.Div(
         html.Label("Select Category:", style={'fontSize': '16px', 'fontWeight': 'bold'}),
         dcc.Dropdown(
             id='category-dropdown',
-            options=[{'label': cat, 'value': cat} for cat in df['category'].unique()],
-            value=df['category'].unique()[0],
+            options=[{'label': 'All', 'value': 'All'}] + [{'label': cat, 'value': cat} for cat in df['category'].unique()],
+            value='All',
             clearable=False,
             searchable=False,
             style={'marginBottom': '20px'}
@@ -192,7 +195,10 @@ app.layout = app.layout = html.Div(
     Input('category-dropdown', 'value')
 )
 def update_graph(selected_category):
-    filtered_df = df_grouped[df_grouped['category'] == selected_category]
+    if selected_category == 'All':
+        filtered_df = df_all
+    else:
+        filtered_df = df_grouped[df_grouped['category'] == selected_category]
     fig = px.line(
         filtered_df,
         x="end_date",
@@ -217,7 +223,10 @@ def update_graph(selected_category):
     Input('category-dropdown', 'value')
 )
 def update_questions_table(selected_category):
-    filtered_df = df[df['category'] == selected_category].sort_values(by='end_date', ascending=True)
+    if selected_category == 'All':
+        filtered_df = df
+    else:
+        filtered_df = df[df['category'] == selected_category].sort_values(by='end_date', ascending=True)
     data = filtered_df.to_dict('records')
     style_data_conditional = [
         {
