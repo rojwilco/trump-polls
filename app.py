@@ -91,7 +91,7 @@ style_data_conditional = [
 ]
 
 # Initialize Dash app
-app = dash.Dash(__name__)
+app = dash.Dash(__name__, requests_pathname_prefix='/')
 
 app.title = "Trump Action Approval Trends"
 
