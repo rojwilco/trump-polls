@@ -8,7 +8,7 @@ from dash.dependencies import Input, Output
 import os
 
 DEBUG=os.environ.get('DEBUG', False)
-HOST=os.environ.get('HOST', "0.0.0.0")
+HOST=os.environ.get('HOST', "::")
 
 # Load CSV from URL
 ghurl = "https://github.com/rojwilco/538-data/tree/master/trump-2-poll-issue-questions"
