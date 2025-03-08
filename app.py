@@ -9,6 +9,7 @@ import os
 
 DEBUG=os.environ.get('DEBUG', False)
 HOST=os.environ.get('HOST', "::")
+APP_PATH=os.environ.get('APP_PATH', "/")
 
 # Load CSV from URL
 ghurl = "https://github.com/rojwilco/538-data/tree/master/trump-2-poll-issue-questions"
@@ -91,7 +92,7 @@ style_data_conditional = [
 ]
 
 # Initialize Dash app
-app = dash.Dash(__name__, requests_pathname_prefix='/')
+app = dash.Dash(__name__, requests_pathname_prefix=APP_PATH)
 
 app.title = "Trump Action Approval Trends"
 
