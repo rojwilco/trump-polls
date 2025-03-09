@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 8080
 
 # Run the command to start the app when the container launches
-CMD ["gunicorn", "wsgi:wsgi_app", "--bind $HOST:$PORT", "--log-level", "info"]    
+CMD ["gunicorn", "wsgi:wsgi_app", "--log-level", "info"]    
