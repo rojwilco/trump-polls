@@ -8,7 +8,6 @@ from dash.dependencies import Input, Output
 import os
 
 DEBUG=os.environ.get('DEBUG', False)
-HOST=os.environ.get('HOST', "::")
 APP_PATH=os.environ.get('APP_PATH', "")
 
 # Load CSV from URL
@@ -92,8 +91,8 @@ style_data_conditional = [
 ]
 
 # Initialize Dash app
-# app = dash.Dash(__name__, requests_pathname_prefix=f"/{APP_PATH}/")
-app = dash.Dash(__name__)
+app = dash.Dash(__name__, requests_pathname_prefix=f"/{APP_PATH}/")
+#app = dash.Dash(__name__)
 
 app.title = "Trump Action Approval Trends"
 
@@ -245,4 +244,4 @@ def update_questions_table(selected_category):
 
 # Run the Dash app
 if __name__ == "__main__":
-    app.run_server(host=HOST, debug=DEBUG)
+    app.run_server(debug=DEBUG)
