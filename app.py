@@ -90,12 +90,14 @@ style_data_conditional = [
     for _, row in df_summary.iterrows()
 ]
 
-# Initialize Dash app
-app = dash.Dash(__name__)
-
-# set up app path if provided
+# set up app path if provided (for when running behind a reverse proxy path)
 if APP_PATH:
-    app.config.request_pathname_prefix = f"/{APP_PATH}/"
+    app_path = f"/{APP_PATH}/"
+else: 
+    app_path = None
+
+# Initialize Dash app
+app = dash.Dash(__name__, requests_pathname_prefix=app_path)
 
 app.title = "Trump Action Approval Trends"
 
