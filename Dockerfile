@@ -17,4 +17,5 @@ COPY . .
 EXPOSE 8080
 
 # Run the command to start the app when the container launches
-CMD ["gunicorn", "wsgi:wsgi_app", "--log-level", "info"]    
+# see https://docs.railway.com/guides/start-command
+CMD ["/bin/sh", "-c", "gunicorn wsgi:wsgi_app --bind $HOST:$PORT --log-level info"]    
