@@ -97,7 +97,7 @@ else:
     app_path = None
 
 # Initialize Dash app
-app = dash.Dash(__name__, requests_pathname_prefix=app_path)
+app = dash.Dash(__name__, requests_pathname_prefix=app_path, serve_locally=False)
 
 app.title = "Trump Action Approval Trends"
 
