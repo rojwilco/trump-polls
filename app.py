@@ -96,8 +96,15 @@ if APP_PATH:
 else: 
     app_path = None
 
+
+# debug settings
+if DEBUG:
+    serve_locally=True
+else:
+    serve_locally=False
+
 # Initialize Dash app
-app = dash.Dash(__name__, requests_pathname_prefix=app_path, serve_locally=False)
+app = dash.Dash(__name__, requests_pathname_prefix=app_path, serve_locally=serve_locally)
 
 app.title = "Trump Action Approval Trends"
 
