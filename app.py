@@ -11,7 +11,7 @@ DEBUG=os.environ.get('DEBUG', False)
 APP_PATH=os.environ.get('APP_PATH', None)
 
 # Load CSV from URL
-ghurl = "https://github.com/rojwilco/538-data/tree/master/trump-2-poll-issue-questions"
+ghurl = "https://github.com/fivethirtyeight/data/tree/master/trump-2-poll-issue-questions"
 url = "https://raw.githubusercontent.com/rojwilco/538-data/refs/heads/master/trump-2-poll-issue-questions/trump-poll-issue-questions.csv"
 df = pd.read_csv(url)
 
